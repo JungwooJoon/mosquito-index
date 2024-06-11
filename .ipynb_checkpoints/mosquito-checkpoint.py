@@ -4,6 +4,7 @@ import requests
 from datetime import datetime
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
@@ -21,7 +22,10 @@ def mosq_pred(mosquit_df, temp_df) :
     X = new_df[['온도 평균(℃)','습도 평균(%)']]
     y = new_df['MOSQUITO_VALUE_HOUSE']
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    poly = PolynomialFeatures(degree=3)
+    X_poly = poly.fit_transform(X)
+    
+    X_train, X_test, y_train, y_test = train_test_split(X_poly, y, test_size=0.2)
     
     model = LinearRegression()
     model.fit(X_train, y_train)
