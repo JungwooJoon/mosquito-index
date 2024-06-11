@@ -26,7 +26,7 @@ def area(temp_df) :
         summary_df = summary_df.rename(columns={'자치구':'SIG_ENG_NM'})
         
         merge_df = seoul_gpd.merge(summary_df, on='SIG_ENG_NM')
-        
+        #st.write(merge_df['SIG_KOR_NM'])
         fig, ax = plt.subplots(ncols=2, sharey=True, figsize=(15, 10))
         
         merge_df.plot(ax=ax[0], column='온도 평균(℃)', cmap='OrRd', legend=False, alpha=0.9)
