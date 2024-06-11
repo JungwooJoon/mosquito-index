@@ -45,3 +45,11 @@ def area(temp_df) :
         ax[1].set_axis_off()
         
         st.pyplot(fig)
+
+        sgg_nm = st.selectbox("자치구", sorted(merge_df['SIG_ENG_NM'].unique()))
+        area_df = summary_df[summary_df['SIG_ENG_NM']==sgg_nm]
+        temp = list(area_df['온도 평균(℃)'])
+        humidity = list(area_df['습도 평균(%)'])
+        
+        st.markdown(f'#### {sgg_nm}의 2023-{month:02d}-{day:02d} 날씨 \n 평균 온도: {temp[0]:.2f}℃')
+        st.markdown(f'평균 습도: {humidity[0]:.2f}%')
